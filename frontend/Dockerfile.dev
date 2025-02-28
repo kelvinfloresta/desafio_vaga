@@ -1,0 +1,14 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package.json and yarn.lock
+COPY package.json yarn.lock ./
+
+# Install dependencies including development ones
+RUN yarn install
+
+# Expose the port
+EXPOSE 3000
+
+# The command will be provided by docker-compose.dev.yml

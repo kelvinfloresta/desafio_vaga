@@ -1,167 +1,156 @@
-
-  
-
-<p  align="center"  width="100%">
-
-  
-
-<img  width="128px"  src="images/favicon.ico"  alt="Zeztra">
-
-  
-
+<p align="center" width="100%">
+   <img width="128px" src="images/favicon.ico" alt="Zeztra">
 </p>
 
+# Zeztra - Transaction Processing System
+
+## Docker Setup
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Running the Application with Docker
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
+
+2. Build and start the containers:
+   ```bash
+   docker-compose up
+   ```
+
+   This will build and start three containers:
+   - MongoDB database (port 27017)
+   - Backend API (port 5000)
+   - Frontend application (port 3000)
+
+3. Access the application:
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000/api
+
+### Stopping the Application
+
+To stop the containers:
+```bash
+docker-compose down
+```
+
+To stop the containers and remove volumes (this will delete the database data):
+```bash
+docker-compose down -v
+```
+
+### Environment Variables
+
+The Docker setup uses the following environment variables:
+
+#### Backend
+- PORT: The port on which the backend server runs (default: 5000)
+- MONGO_URI: The MongoDB connection string (default: mongodb://mongodb:27017/zeztra)
+- NODE_ENV: The environment mode (default: production)
+
+#### Frontend
+- NEXT_PUBLIC_API_URL: The URL of the backend API (default: http://backend:5000/api)
+
+### Volumes
+
+The Docker setup uses the following volumes:
+- mongodb_data: For persisting MongoDB data
+- ./backend/uploads:/app/uploads: For persisting uploaded files
   
 
-  
-
-## Desafio FullStack Zeztra
-
-  
-
-  
-
-**Façam a leitura deste documento com muita atenção do começo ao fim.**
-
-  
-
-  
-
-O intuito deste teste é avaliar seus conhecimento técnicos com a stack MERN (Mongo, Express, React, Nodejs), fazendo uso do NextJS e Typescript (tanto no front-end quanto no back-end).
-
-  
-
-  
-
-O teste consiste em ler <a  href="https://github.com/Zeztra/desafio_vaga/blob/main/transacoes.txt">este arquivo de texto</a>, salvar os clientes e atrelar as transações a eles, além de apresentar esses dados em tela no ReactJS.
-
-  
-
-  
-
-O teste pode ser realizado em quanto tempo quiser, porém, gostariamos que realizasse em não mais que algumas poucas horas.
-
-  
-
-  
-
-## Instruções para o desafio
-
-  
-
-  
-
-1. Faça um fork deste projeto para a sua conta no Github (crie uma caso não tenha);
-
-  
-
-2. Em seguida, impletemente os projetos tal qual descrito abaixo, em seu clone local;
-
-  
-
-3. Use a pasta frontend para o portal, e backend para a API;
-
-  
-
-4. Para a entrega do teste, envie um email com o link do Github para **vitor.ricardo@zeztra.com**.
-
-  
-
-  
-
-## Descrição do Teste
-
-  
-
-  
-
-Uma empresa recebe diariamente um arquivo TXT com várias conciliações de pagamentos de seus clientes.
-
-  
-
-  
-
-Seu objetivo é criar um projeto usando NextJS com Typescript, fazer upload do arquivo TXT enviar para a API em NodeJS/Typescript, armazenar no MongoDB e as suas transações.
-
-
-#### O portal Web deve conter as seguintes funcionalidades:
-
-  
-
-Tela de dashboard, com:
-
-- [ ] botão com upload do arquivo TXT;
-
-- [ ] tabela com a listagem de transações paginada, ordenada pela data da transação;
-- [ ] Filtros de busca para listagem, com por exemplo: por nome e/ou range de data da transação;
-
-  
-
-  
-
-Fique a vontade para usar alguma lib que auxilie no layout.
-
-  
-
-  
-
-#### A API deve ter os seguintes endpoints, seguindo suas respectitivas regras de negócio:
-
-  
-
-  
-
-1. Endpoint para receber o arquivo txt das transações, e para cada linha do TXT:
-
-  
-
-- [ ] Cadastrar o cliente no banco de dados, caso não exista;
-
-  
-
-- [ ] Cadastrar a transação relacionada ao cliente;
-
-   
-
-- [ ] Não deixar duplicar a transação, caso ela já exista na base;
-- [ ] Calcule o tempo da execução da leitura completa do arquivo.
-
-  
-
-2. Endpoint de listagem de transação;
-
-  
-
-- [ ] Preferencialmente, faça a paginação para o frontend direto na consulta;
-- [ ] Aplique os filtros de buscas;
-  
-
-#### Avaliação
-
-  
-
-Seu projeto será avaliado de acordo com os seguintes critérios:
-
-  
-
-  
-
-1. Sua aplicação atende os requisitos básicos?
-
-  
-
-2. Você documentou no README o que deve ser feito para ela rodar?
-
-  
-
-3. Como foi arquitetou ambos os projetos.
-
-  
-
-4. Seu conhecimento geral sobre a stack MERN.
-
-  
-
-  
-
-Boa sorte!
+## How to Run the Project
+
+### Prerequisites
+- Node.js (v20 or higher)
+- MongoDB (local or remote)
+
+### Backend Setup
+1. Navigate to the backend folder:
+   ```sh
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+3. Create a `.env` file in the backend root directory with the following variables:
+   ```sh
+   PORT=5000
+   MONGO_URI=mongodb://localhost:27017/zeztra
+   NODE_ENV=development
+   ```
+
+4. Start the server in development mode:
+   ```sh
+   yarn dev
+   ```
+
+### Frontend Setup
+1. Navigate to the frontend folder:
+   ```sh
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```sh
+   yarn
+   ```
+
+3. Create a `.env.local` file in the frontend root directory with the following variables:
+   ```sh
+   NEXT_PUBLIC_API_URL=http://localhost:5000/api
+   ```
+
+4. Start the development server:
+   ```sh
+   yarn dev
+   ```
+
+5. Access the application in your browser:
+   ```sh
+   http://localhost:3000
+   ```
+
+## Application Usage
+
+1. On the homepage, click the button to select a transaction file (`.txt` format).
+2. After uploading, the transactions will be processed and displayed in the table.
+3. Use filters to search transactions by client name or date range.
+4. Navigate between pages using pagination controls.
+
+## Technologies Used
+
+### Backend
+- Node.js and Express
+- TypeScript
+- MongoDB with Mongoose
+- Multer for file uploads
+
+### Frontend
+- Next.js
+- React
+- TypeScript
+- Styled Components
+- Axios for HTTP requests
+
+## Architectural Decisions
+
+### Backend
+- Clear separation of concerns (controllers, use cases, models, routes, etc.)
+- Line-by-line file processing for efficiency
+- Data validation and error handling
+- Pagination and filters implemented directly in MongoDB queries
+
+### Frontend
+- Componentization for reusability
+- State management with React Hooks
+- Styling with Tailwind CSS to avoid CSS-in-JS (Performance)
+- API communication through centralized services
